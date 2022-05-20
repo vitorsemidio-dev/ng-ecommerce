@@ -1,14 +1,32 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Observable, Subscription } from 'rxjs';
 import { CarrinhoService } from '../carrinho/carrinho.service';
-import { MyErrorStateMatcher } from './poc-input/poc-input.component';
 import { ProdutoModel } from './produto.model';
 import { ProdutoService } from './produto.service';
-import { produtosMock } from './produtos.mock';
-import { promocoesMock } from './promocao.mock';
 import { PromocaoModel } from './promocao.model';
 import { PromocaoService } from './promocao.service';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
+  }
+}
 
 @Component({
   selector: 'app-produtos',
@@ -16,8 +34,6 @@ import { PromocaoService } from './promocao.service';
   styleUrls: ['./produtos.component.scss'],
 })
 export class ProdutosComponent implements OnInit, OnDestroy {
-  produtos: ProdutoModel[] = [];
-  promocoes: PromocaoModel[] = [];
   subscriptions: Subscription[] = [];
 
   produtos$!: Observable<ProdutoModel[]>;
@@ -43,8 +59,6 @@ export class ProdutosComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.produtos = produtosMock;
-    this.promocoes = promocoesMock;
     this.loadData();
   }
 
@@ -67,7 +81,6 @@ export class ProdutosComponent implements OnInit, OnDestroy {
   }
 
   loadCarrinho() {
-    // this.carrinho$ = this.carrinhoService.getCarrinho();
     const sub = this.carrinhoService
       .getCarrinho()
       .subscribe((carrinhoAtual) => {
@@ -75,8 +88,6 @@ export class ProdutosComponent implements OnInit, OnDestroy {
       });
     this.subscriptions.push(sub);
   }
-
-  openForm() {}
 
   onSubmit() {
     this._save();

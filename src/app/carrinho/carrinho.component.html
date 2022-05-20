@@ -1,56 +1,3 @@
-<table *ngIf="showTableLegacy">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Item</th>
-      <th>Quantidade</th>
-      <th>Preço</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr *ngFor="let produtoItem of carrinho$ | async">
-      <td>imagem</td>
-      <td>
-        <strong>{{ produtoItem.nome }}</strong>
-        <span>{{ produtoItem.preco | currency }}</span>
-      </td>
-      <td>
-        <div>
-          <button
-            mat-icon-button
-            type="button"
-            (click)="handleDecrementItem(produtoItem)"
-          >
-            <mat-icon>remove_shopping_cart</mat-icon>
-          </button>
-          <input type="number" readOnly [value]="produtoItem.quantidade" />
-          <button
-            mat-icon-button
-            type="button"
-            (click)="handleIncrementItem(produtoItem)"
-          >
-            <mat-icon>add_shopping_cart</mat-icon>
-          </button>
-        </div>
-      </td>
-      <td>
-        <!-- TODO preco x quantidade -->
-        <strong>{{ produtoItem.preco | currency }}</strong>
-      </td>
-      <td>
-        <button
-          mat-icon-button
-          type="button"
-          (click)="handleRemoveItem(produtoItem)"
-        >
-          <mat-icon>delete_forever</mat-icon>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="item">
     <th mat-header-cell *matHeaderCellDef>Item</th>
@@ -91,7 +38,6 @@
   <ng-container matColumnDef="preco">
     <th mat-header-cell *matHeaderCellDef>Preço</th>
     <td mat-cell *matCellDef="let element">
-      <!-- TODO preco x quantidade -->
       <strong>{{ element.precoSubTotal | currency }}</strong>
     </td>
   </ng-container>

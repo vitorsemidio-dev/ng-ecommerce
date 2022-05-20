@@ -1,6 +1,6 @@
-import { ProdutoModel } from './../produtos/produto.model';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ProdutoModel } from './../produtos/produto.model';
 import { CarrinhoItemModel } from './carrinho-item.model';
 
 @Injectable({

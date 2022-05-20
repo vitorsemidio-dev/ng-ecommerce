@@ -13,8 +13,6 @@ import { MatTableDataSource } from '@angular/material/table';
 export class CarrinhoComponent implements OnInit {
   carrinho$!: Observable<CarrinhoItemModel[]>;
   precoTotalCarrinho: number = 0;
-  showTableLegacy = false;
-
   displayedColumns: string[] = [
     'item',
     'quantidade',

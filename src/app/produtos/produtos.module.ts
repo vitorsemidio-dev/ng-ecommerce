@@ -12,14 +12,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
-import { PocInputComponent } from './poc-input/poc-input.component';
 import { ProdutoService } from './produto.service';
 import { ProdutosRoutingModule } from './produtos-routing.module';
 import { ProdutosComponent } from './produtos.component';
 import { PromocaoService } from './promocao.service';
 
 @NgModule({
-  declarations: [ProdutosComponent, PocInputComponent],
+  declarations: [ProdutosComponent],
   imports: [
     CommonModule,
     ProdutosRoutingModule,
