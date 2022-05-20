@@ -7,6 +7,7 @@ import { ProdutoService } from './produto.service';
 import { produtosMock } from './produtos.mock';
 import { promocoesMock } from './promocao.mock';
 import { PromocaoModel } from './promocao.model';
+import { PromocaoService } from './promocao.service';
 
 @Component({
   selector: 'app-produtos',
@@ -32,7 +33,8 @@ export class ProdutosComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private produtoService: ProdutoService
+    private produtoService: ProdutoService,
+    private promocaoService: PromocaoService
   ) {}
 
   ngOnInit(): void {
@@ -46,7 +48,7 @@ export class ProdutosComponent implements OnInit {
     this.produtos$.subscribe((produtos) => {
       console.log(produtos);
     });
-    // this.promocoes$ = this.produtoService.get();
+    this.promocoes$ = this.promocaoService.get();
   }
 
   openForm() {}

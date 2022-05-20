@@ -14,6 +14,7 @@ import { PocInputComponent } from './poc-input/poc-input.component';
 import { ProdutoService } from './produto.service';
 import { ProdutosRoutingModule } from './produtos-routing.module';
 import { ProdutosComponent } from './produtos.component';
+import { PromocaoService } from './promocao.service';
 
 @NgModule({
   declarations: [ProdutosComponent, PocInputComponent],
@@ -32,6 +33,6 @@ import { ProdutosComponent } from './produtos.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [ProdutoService],
+  providers: [ProdutoService, PromocaoService],
 })
 export class ProdutosModule {}
