@@ -45,16 +45,25 @@ export class ProdutosComponent implements OnInit {
 
   loadData() {
     this.produtos$ = this.produtoService.get();
-    this.produtos$.subscribe((produtos) => {
-      console.log(produtos);
-    });
     this.promocoes$ = this.promocaoService.get();
   }
 
   openForm() {}
 
   onSubmit() {
-    console.log(this.produtoForm.value);
+    this.produtoService.create(this.produtoForm.value).subscribe({
+      next: (produto) => {
+        console.log(produto);
+        console.log('sucesso');
+      },
+      error: (err) => {
+        console.log(err);
+        console.log('erro');
+      },
+      complete: () => {
+        console.log('completo');
+      },
+    });
   }
 
   extractFieldValue(obj: any, field: string) {
