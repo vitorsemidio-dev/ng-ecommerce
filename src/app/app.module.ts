@@ -1,9 +1,11 @@
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,8 +21,9 @@ registerLocaleData(ptBr);
     BrowserAnimationsModule,
     MatSliderModule,
     MatRippleModule,
-    FormsModule,
-    ReactiveFormsModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },

@@ -1,3 +1,24 @@
+<mat-toolbar class="toolbar-wrapper" color="primary">
+  <span>E-commerce</span>
+  <a [routerLink]="['/carrinho']" routerLinkActive="active">
+    <button mat-raised-button>
+      Carrinho
+      <mat-icon>shopping_cart</mat-icon>
+
+      <!-- <mat-icon>favorite</mat-icon> -->
+      <!-- <mat-icon>add_shopping_cart</mat-icon> -->
+      <!-- <mat-icon>remove_shopping_cart</mat-icon> -->
+      <!-- <mat-icon>new_releases</mat-icon> -->
+      <!-- <mat-icon>fiber_new</mat-icon> -->
+    </button>
+  </a>
+  <a [routerLink]="['/produtos']" routerLinkActive="active">
+    <button mat-raised-button>
+      Produtos
+      <mat-icon>fiber_new</mat-icon>
+    </button>
+  </a>
+</mat-toolbar>
 <div class="app-wrapper">
   <router-outlet></router-outlet>
 </div>
