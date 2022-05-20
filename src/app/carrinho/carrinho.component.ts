@@ -14,7 +14,13 @@ export class CarrinhoComponent implements OnInit {
   carrinho$!: Observable<CarrinhoItemModel[]>;
   showTableLegacy = false;
 
-  displayedColumns: string[] = ['item', 'quantidade', 'preco', 'promocao'];
+  displayedColumns: string[] = [
+    'item',
+    'quantidade',
+    'preco',
+    'promocao',
+    'acao',
+  ];
   dataSource = new MatTableDataSource<CarrinhoItemModel>([]);
 
   constructor(private readonly carrinhoService: CarrinhoService) {}
