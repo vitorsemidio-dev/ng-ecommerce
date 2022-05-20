@@ -68,8 +68,27 @@
 <div class="produtos-wrapper">
   <div *ngFor="let produto of produtos$ | async">
     <mat-card class="example-card">
-      <mat-card-header>
+      <mat-card-header class="card-header">
         <mat-card-title>{{ produto.nome }}</mat-card-title>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            <!-- <mat-icon>delete_forever</mat-icon> -->
+            <!-- <mat-icon>delete_outline</mat-icon> -->
+            <span>Excluir</span>
+          </button>
+          <button mat-menu-item disabled>
+            <mat-icon>favorite</mat-icon>
+            <span>Favoritos</span>
+          </button>
+        </mat-menu>
       </mat-card-header>
       <!-- TODO: Adicionar imagem produto -->
       <div class="p-relative">
@@ -91,11 +110,11 @@
       <mat-card-content>
         {{ produto.preco | currency }}
       </mat-card-content>
-      <mat-card-actions
-        style="display: flex; gap: 0.5rem; flex-direction: row-reverse"
-      >
-        <button mat-raised-button color="primary">Adicionar</button>
-        <button mat-stroked-button color="accent">Remover</button>
+      <mat-card-actions style="display: grid; grid-template-columns: 1fr">
+        <button mat-raised-button color="primary">
+          <mat-icon>add_shopping_cart</mat-icon>
+          Adicionar ao Carrinho
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>

@@ -8,7 +8,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { PocInputComponent } from './poc-input/poc-input.component';
 import { ProdutoService } from './produto.service';
@@ -29,6 +31,8 @@ import { PromocaoService } from './promocao.service';
     MatSelectModule,
     MatRippleModule,
     MatInputModule,
+    MatMenuModule,
+    MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
