@@ -22,6 +22,7 @@ export class ProdutosComponent implements OnInit {
   promocoes$!: Observable<PromocaoModel[]>;
 
   produtoForm = this.fb.group({
+    id: [null],
     nome: ['', [Validators.required, Validators.minLength(3)]],
     preco: [null, [Validators.required, Validators.min(1)]],
     promocao: this.fb.group({
@@ -44,24 +45,52 @@ export class ProdutosComponent implements OnInit {
   }
 
   loadData() {
+    this.loadProdutos();
+    this.loadPromocoes();
+  }
+
+  loadProdutos() {
     this.produtos$ = this.produtoService.get();
+  }
+
+  loadPromocoes() {
     this.promocoes$ = this.promocaoService.get();
   }
 
   openForm() {}
 
   onSubmit() {
-    this.produtoService.create(this.produtoForm.value).subscribe({
+    this._save();
+  }
+
+  private _save() {
+    const produtoForm = this.produtoForm.value;
+    this.produtoService.save(produtoForm).subscribe({
       next: (produto) => {
         console.log(produto);
-        console.log('sucesso');
+        this.loadProdutos();
+        this.produtoForm.reset();
       },
       error: (err) => {
         console.log(err);
-        console.log('erro');
       },
       complete: () => {
         console.log('completo');
+      },
+    });
+  }
+
+  handleEdit(produtoTarget: ProdutoModel) {
+    this._fillForm(produtoTarget);
+  }
+
+  private _fillForm(produto: ProdutoModel) {
+    this.produtoForm.patchValue({
+      id: produto.id,
+      nome: produto.nome,
+      preco: produto.preco,
+      promocao: {
+        id: produto.promocao?.id,
       },
     });
   }

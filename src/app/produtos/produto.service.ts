@@ -20,7 +20,7 @@ export class ProdutoService {
     return this.httpClient.get<ProdutoModel>(`${this.baseUrl}/produtos/${id}`);
   }
 
-  create(produtoData: ProdutoModel) {
+  create(produtoData: Omit<ProdutoModel, 'id'>) {
     return this.httpClient.post<ProdutoModel>(
       `${this.baseUrl}/produtos`,
       produtoData
@@ -38,5 +38,14 @@ export class ProdutoService {
     return this.httpClient.delete<ProdutoModel>(
       `${this.baseUrl}/produtos/${id}`
     );
+  }
+
+  save(produtoData: ProdutoModel) {
+    const { id, ...restData } = produtoData;
+    if (id) {
+      return this.update(produtoData);
+    } else {
+      return this.create(restData);
+    }
   }
 }
