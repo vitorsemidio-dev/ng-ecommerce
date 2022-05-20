@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CarrinhoService } from '../carrinho/carrinho.service';
 import { MyErrorStateMatcher } from './poc-input/poc-input.component';
 import { ProdutoModel } from './produto.model';
@@ -15,9 +15,10 @@ import { PromocaoService } from './promocao.service';
   templateUrl: './produtos.component.html',
   styleUrls: ['./produtos.component.scss'],
 })
-export class ProdutosComponent implements OnInit {
+export class ProdutosComponent implements OnInit, OnDestroy {
   produtos: ProdutoModel[] = [];
   promocoes: PromocaoModel[] = [];
+  subscriptions: Subscription[] = [];
 
   produtos$!: Observable<ProdutoModel[]>;
   promocoes$!: Observable<PromocaoModel[]>;
@@ -47,6 +48,10 @@ export class ProdutosComponent implements OnInit {
     this.loadData();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+  }
+
   loadData() {
     this.loadProdutos();
     this.loadPromocoes();
@@ -63,9 +68,12 @@ export class ProdutosComponent implements OnInit {
 
   loadCarrinho() {
     // this.carrinho$ = this.carrinhoService.getCarrinho();
-    this.carrinhoService.getCarrinho().subscribe((carrinhoAtual) => {
-      console.log(carrinhoAtual);
-    });
+    const sub = this.carrinhoService
+      .getCarrinho()
+      .subscribe((carrinhoAtual) => {
+        console.log(carrinhoAtual);
+      });
+    this.subscriptions.push(sub);
   }
 
   openForm() {}
