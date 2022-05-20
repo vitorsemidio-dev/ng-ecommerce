@@ -1,1 +1,6 @@
-<p>produtos works!</p>
+<h2>Produtos</h2>
+
+<div *ngFor="let produto of produtos">
+  <strong>Nome: {{ produto.nome }} </strong>
+  <small>Preço: {{ produto.preco }} </small>
+</div>
