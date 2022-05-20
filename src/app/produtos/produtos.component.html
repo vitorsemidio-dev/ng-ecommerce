@@ -58,12 +58,18 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- <label for="product-price">Preço: </label>
-  <input id="product-price" type="number" formControlName="preco" /> -->
-
   <div formGroupName="promocao">
-    <label for="street">Promoção: </label>
-    <input id="street" type="text" formControlName="id" />
+    <mat-form-field appearance="fill">
+      <mat-label>Selecione uma promoção</mat-label>
+      <mat-select [formControlName]="'id'">
+        <mat-option>Nenhuma</mat-option>
+        <mat-option value="option1">Leve 2, Pague 1</mat-option>
+        <mat-option value="option2">3 por R$10,00</mat-option>
+        <mat-option value="option3">Segundo com 50% desconto</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <p>{{ produtoForm.get("promocao")?.get("id")?.value }}</p>
   </div>
 
   <p>Complete the form to enable button.</p>
