@@ -111,7 +111,11 @@
         {{ produto.preco | currency }}
       </mat-card-content>
       <mat-card-actions style="display: grid; grid-template-columns: 1fr">
-        <button mat-raised-button color="primary">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="handleAddProduto(produto)"
+        >
           <mat-icon>add_shopping_cart</mat-icon>
           Adicionar ao Carrinho
         </button>
