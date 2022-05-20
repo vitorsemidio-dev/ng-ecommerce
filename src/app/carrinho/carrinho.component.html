@@ -1,6 +1,6 @@
 <p>carrinho works!</p>
 
-<table>
+<table *ngIf="showTableLegacy">
   <thead>
     <tr>
       <th></th>
@@ -55,7 +55,7 @@
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Checkbox Column -->
-  <ng-container matColumnDef="select">
+  <!-- <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef>
       <mat-checkbox
         (change)="$event ? masterToggle() : null"
@@ -74,30 +74,62 @@
       >
       </mat-checkbox>
     </td>
-  </ng-container>
+  </ng-container> -->
 
   <!-- Position Column -->
-  <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef>No.</th>
-    <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+  <ng-container matColumnDef="item">
+    <th mat-header-cell *matHeaderCellDef>Item</th>
+    <td mat-cell *matCellDef="let element">
+      <!-- {{ element.position }} -->
+
+      <strong>{{ element.nome }}</strong>
+      <span>{{ element.preco | currency }}</span>
+    </td>
   </ng-container>
 
   <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  <ng-container matColumnDef="quantidade">
+    <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+    <td mat-cell *matCellDef="let element">
+      <!-- {{ element.name }} -->
+
+      <div>
+        <button
+          mat-icon-button
+          type="button"
+          (click)="handleDecrementItem(element)"
+        >
+          <mat-icon>remove_shopping_cart</mat-icon>
+        </button>
+        <input type="number" readOnly [value]="element.quantidade" />
+        <button
+          mat-icon-button
+          type="button"
+          (click)="handleIncrementItem(element)"
+        >
+          <mat-icon>add_shopping_cart</mat-icon>
+        </button>
+      </div>
+    </td>
   </ng-container>
 
   <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef>Weight</th>
-    <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+  <ng-container matColumnDef="preco">
+    <th mat-header-cell *matHeaderCellDef>Preço</th>
+    <td mat-cell *matCellDef="let element">
+      <!-- {{ element.weight }} -->
+      <!-- TODO preco x quantidade -->
+      <strong>{{ element.preco | currency }}</strong>
+    </td>
   </ng-container>
 
   <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef>Symbol</th>
-    <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+  <ng-container matColumnDef="promocao">
+    <th mat-header-cell *matHeaderCellDef>Promoção</th>
+    <td mat-cell *matCellDef="let element">
+      <!-- {{ element.symbol }} -->
+      {{ element?.promocao?.nome }}
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

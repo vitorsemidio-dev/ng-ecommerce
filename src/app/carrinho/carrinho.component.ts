@@ -33,6 +33,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class CarrinhoComponent implements OnInit {
   carrinho$!: Observable<CarrinhoItemModel[]>;
+  showTableLegacy = false;
 
   constructor(private readonly carrinhoService: CarrinhoService) {}
 
@@ -46,6 +47,10 @@ export class CarrinhoComponent implements OnInit {
 
   loadCarrinho() {
     this.carrinho$ = this.carrinhoService.getCarrinho();
+
+    this.carrinho$.subscribe((carrinho) => {
+      this.dataSource = new MatTableDataSource<CarrinhoItemModel>(carrinho);
+    });
   }
 
   handleIncrementItem(item: CarrinhoItemModel | ProdutoModel) {
@@ -63,14 +68,15 @@ export class CarrinhoComponent implements OnInit {
   // Example
 
   displayedColumns: string[] = [
-    'select',
-    'position',
-    'name',
-    'weight',
-    'symbol',
+    'item',
+    'quantidade',
+    'preco',
+    'promocao',
+    // 'weight',
+    // 'symbol',
   ];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  dataSource = new MatTableDataSource<CarrinhoItemModel>([]);
+  selection = new SelectionModel<CarrinhoItemModel>(true, []);
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -90,12 +96,12 @@ export class CarrinhoComponent implements OnInit {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
+  checkboxLabel(row?: CarrinhoItemModel): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-      row.position + 1
+      row.nome + 1
     }`;
   }
 }
