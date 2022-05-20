@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MyErrorStateMatcher } from './poc-input/poc-input.component';
 import { ProdutoModel } from './produto.model';
 import { produtosMock } from './produtos.mock';
+import { promocoesMock } from './promocao.mock';
+import { PromocaoModel } from './promocao.model';
 
 @Component({
   selector: 'app-produtos',
@@ -11,6 +13,7 @@ import { produtosMock } from './produtos.mock';
 })
 export class ProdutosComponent implements OnInit {
   produtos: ProdutoModel[] = [];
+  promocoes: PromocaoModel[] = [];
 
   produtoForm = this.fb.group({
     nome: ['', [Validators.required, Validators.minLength(3)]],
@@ -26,6 +29,7 @@ export class ProdutosComponent implements OnInit {
 
   ngOnInit(): void {
     this.produtos = produtosMock;
+    this.promocoes = promocoesMock;
   }
 
   openDialog() {

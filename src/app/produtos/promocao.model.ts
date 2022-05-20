@@ -1,5 +1,6 @@
 export interface PromocaoModel {
   id: string;
+  nome?: string;
   criadoEm: Date | string;
   atualizadoEm: Date | string;
   deletadoEm: Date | string | null;

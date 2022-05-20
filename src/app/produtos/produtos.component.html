@@ -63,9 +63,12 @@
       <mat-label>Selecione uma promoção</mat-label>
       <mat-select [formControlName]="'id'">
         <mat-option>Nenhuma</mat-option>
-        <mat-option value="option1">Leve 2, Pague 1</mat-option>
-        <mat-option value="option2">3 por R$10,00</mat-option>
-        <mat-option value="option3">Segundo com 50% desconto</mat-option>
+        <mat-option
+          *ngFor="let promocaoItem of promocoes"
+          [value]="promocaoItem.id"
+        >
+          {{ promocaoItem.nome }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
