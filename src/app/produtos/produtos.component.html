@@ -8,8 +8,31 @@
 <p>Form Status: {{ produtoForm.status }}</p>
 
 <form [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
-  <label for="product-name">Nome Produto: </label>
-  <input id="product-name" type="text" formControlName="nome" />
+  <!-- <label for="product-name">Nome Produto: </label>
+  <input id="product-name" type="text" formControlName="nome" /> -->
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Nome Produto</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControlName]="'nome'"
+      [errorStateMatcher]="matcher"
+      placeholder="Ex. Mouse"
+    />
+    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+    <mat-hint>Parece está tudo certo!</mat-hint>
+    <!-- <mat-error
+      *ngIf="
+        produtoForm.get('nome')?.hasError('email') &&
+        !produtoForm.get('nome')?.hasError('required')
+      "
+    >
+      Please enter a valid email address
+    </mat-error> -->
+    <mat-error *ngIf="produtoForm.get('nome')?.hasError('required')">
+      Nome é <strong>obrigatório</strong>
+    </mat-error>
+  </mat-form-field>
 
   <label for="product-price">Preço: </label>
   <input id="product-price" type="number" formControlName="preco" />

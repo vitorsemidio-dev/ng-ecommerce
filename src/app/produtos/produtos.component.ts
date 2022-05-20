@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MyErrorStateMatcher } from './poc-input/poc-input.component';
 import { ProdutoModel } from './produto.model';
 import { produtosMock } from './produtos.mock';
 
@@ -18,6 +19,8 @@ export class ProdutosComponent implements OnInit {
       id: [null],
     }),
   });
+
+  matcher = new MyErrorStateMatcher();
 
   constructor(private fb: FormBuilder) {}
 
