@@ -5,6 +5,24 @@
 
 <app-poc-input></app-poc-input>
 
+<p>Form Status: {{ produtoForm.status }}</p>
+
+<form [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
+  <label for="product-name">Nome Produto: </label>
+  <input id="product-name" type="text" formControlName="nome" />
+
+  <label for="product-price">Preço: </label>
+  <input id="product-price" type="number" formControlName="preco" />
+
+  <div formGroupName="promocao">
+    <label for="street">Promoção: </label>
+    <input id="street" type="text" formControlName="id" />
+  </div>
+
+  <p>Complete the form to enable button.</p>
+  <button type="submit" [disabled]="!produtoForm.valid">Submit</button>
+</form>
+
 <div class="produtos-wrapper">
   <div *ngFor="let produto of produtos">
     <mat-card class="example-card">

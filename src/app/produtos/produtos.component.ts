@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ProdutoModel } from './produto.model';
 import { produtosMock } from './produtos.mock';
 
@@ -10,7 +11,15 @@ import { produtosMock } from './produtos.mock';
 export class ProdutosComponent implements OnInit {
   produtos: ProdutoModel[] = [];
 
-  constructor() {}
+  produtoForm = this.fb.group({
+    nome: ['', [Validators.required, Validators.minLength(3)]],
+    preco: [0, [Validators.required, Validators.min(1)]],
+    promocao: this.fb.group({
+      id: [null],
+    }),
+  });
+
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.produtos = produtosMock;
@@ -18,5 +27,9 @@ export class ProdutosComponent implements OnInit {
 
   openDialog() {
     // TODO: open dialog
+  }
+
+  onSubmit() {
+    console.log(this.produtoForm.value);
   }
 }
