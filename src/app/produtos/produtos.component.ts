@@ -84,6 +84,21 @@ export class ProdutosComponent implements OnInit {
     this._fillForm(produtoTarget);
   }
 
+  handleDelete(produtoTarget: ProdutoModel) {
+    this.produtoService.delete(produtoTarget.id).subscribe({
+      next: (produto) => {
+        console.log(produto);
+        this.loadProdutos();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {
+        console.log('completo');
+      },
+    });
+  }
+
   private _fillForm(produto: ProdutoModel) {
     this.produtoForm.patchValue({
       id: produto.id,
