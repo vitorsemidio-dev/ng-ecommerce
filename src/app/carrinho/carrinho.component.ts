@@ -33,4 +33,8 @@ export class CarrinhoComponent implements OnInit {
   handleDecrementItem(item: CarrinhoItemModel | ProdutoModel) {
     this.carrinhoService.decrementItem(item);
   }
+
+  handleRemoveItem(item: CarrinhoItemModel | ProdutoModel) {
+    this.carrinhoService.removeItem(item);
+  }
 }

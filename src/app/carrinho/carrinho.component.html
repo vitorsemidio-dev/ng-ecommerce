@@ -41,7 +41,11 @@
         <strong>{{ produtoItem.preco | currency }}</strong>
       </td>
       <td>
-        <button mat-icon-button type="button">
+        <button
+          mat-icon-button
+          type="button"
+          (click)="handleRemoveItem(produtoItem)"
+        >
           <mat-icon>delete_forever</mat-icon>
         </button>
       </td>

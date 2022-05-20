@@ -36,4 +36,13 @@ export class CarrinhoService {
     }
     this.carrinho$.next(carrinho);
   }
+
+  removeItem(item: CarrinhoItemModel | ProdutoModel) {
+    const carrinho = this.carrinho$.getValue();
+    const index = carrinho.findIndex((i) => i.id === item.id);
+    if (index >= 0) {
+      carrinho.splice(index, 1);
+    }
+    this.carrinho$.next(carrinho);
+  }
 }
