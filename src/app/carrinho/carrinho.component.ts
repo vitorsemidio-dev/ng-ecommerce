@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ProdutoModel } from '../produtos/produto.model';
-import { produtosMock } from '../produtos/produtos.mock';
+import { CarrinhoItemModel } from './carrinho-item.model';
+import { CarrinhoService } from './carrinho.service';
 
 @Component({
   selector: 'app-carrinho',
@@ -8,9 +10,27 @@ import { produtosMock } from '../produtos/produtos.mock';
   styleUrls: ['./carrinho.component.scss'],
 })
 export class CarrinhoComponent implements OnInit {
-  carrinho: ProdutoModel[] = produtosMock;
+  carrinho$!: Observable<CarrinhoItemModel[]>;
 
-  constructor() {}
+  constructor(private readonly carrinhoService: CarrinhoService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
+    this.loadCarrinho();
+  }
+
+  loadCarrinho() {
+    this.carrinho$ = this.carrinhoService.getCarrinho();
+  }
+
+  handleAddItem(item: CarrinhoItemModel | ProdutoModel) {
+    this.carrinhoService.addItem(item);
+  }
+
+  handleRemoveItem(item: CarrinhoItemModel | ProdutoModel) {
+    this.carrinhoService.removeItem(item);
+  }
 }

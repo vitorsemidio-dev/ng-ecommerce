@@ -11,25 +11,39 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let produto of carrinho">
+    <tr *ngFor="let produtoItem of carrinho$ | async">
       <td>imagem</td>
       <td>
-        <strong>{{ produto.nome }}</strong>
-        <span>{{ produto.preco | currency }}</span>
+        <strong>{{ produtoItem.nome }}</strong>
+        <span>{{ produtoItem.preco | currency }}</span>
       </td>
       <td>
         <div>
-          <button type="button">icon remove</button>
-          <input type="number" readOnly />
-          <button type="button">icon add</button>
+          <button
+            mat-icon-button
+            type="button"
+            (click)="handleRemoveItem(produtoItem)"
+          >
+            <mat-icon>remove_shopping_cart</mat-icon>
+          </button>
+          <input type="number" readOnly [value]="produtoItem.quantidade" />
+          <button
+            mat-icon-button
+            type="button"
+            (click)="handleAddItem(produtoItem)"
+          >
+            <mat-icon>add_shopping_cart</mat-icon>
+          </button>
         </div>
       </td>
       <td>
         <!-- TODO preco x quantidade -->
-        <strong>{{ produto.preco | currency }}</strong>
+        <strong>{{ produtoItem.preco | currency }}</strong>
       </td>
       <td>
-        <button type="button">icon remove</button>
+        <button mat-icon-button type="button">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
       </td>
     </tr>
   </tbody>
