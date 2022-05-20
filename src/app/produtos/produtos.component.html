@@ -1,6 +1,39 @@
 <h2>Produtos</h2>
 
-<div *ngFor="let produto of produtos">
-  <strong>Nome: {{ produto.nome }} </strong>
-  <small>Preço: {{ produto.preco }} </small>
+<div class="produtos-wrapper">
+  <div *ngFor="let produto of produtos">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{ produto.nome }}</mat-card-title>
+      </mat-card-header>
+      <!-- TODO: Adicionar imagem produto -->
+      <div class="p-relative">
+        <img
+          class="image-cover"
+          src="https://picsum.photos/200/300?random=1"
+          alt="Random photo from picsum"
+        />
+
+        <div *ngIf="produto.promocao" class="badge-promocao-container">
+          <mat-chip *ngIf="produto.promocao.leveX" color="primary" selected>
+            {{ produto.promocao.leveX }} pague {{ produto.promocao.pagueY }}
+          </mat-chip>
+          <mat-chip *ngIf="produto.promocao.compreX" color="accent" selected>
+            {{ produto.promocao.compreX }} por {{ produto.promocao.porY }}
+          </mat-chip>
+        </div>
+      </div>
+      <mat-card-content>
+        {{ produto.preco | currency }}
+      </mat-card-content>
+      <mat-card-actions
+        style="display: flex; gap: 0.5rem; justify-content: space-between"
+      >
+        <button mat-raised-button color="primary">Adicionar ao Carrinho</button>
+        <button mat-stroked-button color="accent">Remover do Carrinho</button>
+        <!-- <button mat-button>Adicionar ao Carrinho</button> -->
+        <!-- <button mat-button>Remover do Carrinho</button> -->
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
