@@ -14,7 +14,7 @@ export class CarrinhoService {
     return this.carrinho$.asObservable();
   }
 
-  addItem(item: CarrinhoItemModel | ProdutoModel) {
+  incrementItem(item: CarrinhoItemModel | ProdutoModel) {
     const carrinho = this.carrinho$.getValue();
     const index = carrinho.findIndex((i) => i.id === item.id);
     if (index >= 0) {
@@ -25,7 +25,7 @@ export class CarrinhoService {
     this.carrinho$.next(carrinho);
   }
 
-  removeItem(item: CarrinhoItemModel | ProdutoModel) {
+  decrementItem(item: CarrinhoItemModel | ProdutoModel) {
     const carrinho = this.carrinho$.getValue();
     const index = carrinho.findIndex((i) => i.id === item.id);
     if (index >= 0) {

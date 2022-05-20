@@ -26,11 +26,11 @@ export class CarrinhoComponent implements OnInit {
     this.carrinho$ = this.carrinhoService.getCarrinho();
   }
 
-  handleAddItem(item: CarrinhoItemModel | ProdutoModel) {
-    this.carrinhoService.addItem(item);
+  handleIncrementItem(item: CarrinhoItemModel | ProdutoModel) {
+    this.carrinhoService.incrementItem(item);
   }
 
-  handleRemoveItem(item: CarrinhoItemModel | ProdutoModel) {
-    this.carrinhoService.removeItem(item);
+  handleDecrementItem(item: CarrinhoItemModel | ProdutoModel) {
+    this.carrinhoService.decrementItem(item);
   }
 }

@@ -94,7 +94,7 @@ export class ProdutosComponent implements OnInit {
   }
 
   handleAddProduto(produtoTarget: ProdutoModel) {
-    this.carrinhoService.addItem(produtoTarget);
+    this.carrinhoService.incrementItem(produtoTarget);
   }
 
   extractFieldValue(obj: any, field: string) {
