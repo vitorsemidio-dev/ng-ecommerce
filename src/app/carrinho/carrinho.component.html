@@ -1,1 +1,36 @@
 <p>carrinho works!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Item</th>
+      <th>Quantidade</th>
+      <th>Preço</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let produto of carrinho">
+      <td>imagem</td>
+      <td>
+        <strong>{{ produto.nome }}</strong>
+        <span>{{ produto.preco | currency }}</span>
+      </td>
+      <td>
+        <div>
+          <button type="button">icon remove</button>
+          <input type="number" readOnly />
+          <button type="button">icon add</button>
+        </div>
+      </td>
+      <td>
+        <!-- TODO preco x quantidade -->
+        <strong>{{ produto.preco | currency }}</strong>
+      </td>
+      <td>
+        <button type="button">icon remove</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
