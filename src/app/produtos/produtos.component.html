@@ -8,8 +8,6 @@
 <p>Form Status: {{ produtoForm.status }}</p>
 
 <form [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
-  <!-- <label for="product-name">Nome Produto: </label>
-  <input id="product-name" type="text" formControlName="nome" /> -->
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Nome Produto</mat-label>
     <input
@@ -34,8 +32,34 @@
     </mat-error>
   </mat-form-field>
 
-  <label for="product-price">Preço: </label>
-  <input id="product-price" type="number" formControlName="preco" />
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Preço</mat-label>
+    <input
+      type="number"
+      matInput
+      [formControlName]="'preco'"
+      [errorStateMatcher]="matcher"
+      placeholder="Ex. R$ 10,00"
+    />
+
+    <mat-hint>Parece está tudo certo!</mat-hint>
+
+    <mat-error *ngIf="produtoForm.get('preco')?.hasError('required')">
+      Preço é <strong>obrigatório</strong>
+    </mat-error>
+    <mat-error
+      *ngIf="
+        produtoForm.get('preco')?.hasError('min') &&
+        !produtoForm.get('preco')?.hasError('required')
+      "
+    >
+      O valor mínimo é
+      {{ extractFieldValue(produtoForm.get("preco")?.getError("min"), "min") }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- <label for="product-price">Preço: </label>
+  <input id="product-price" type="number" formControlName="preco" /> -->
 
   <div formGroupName="promocao">
     <label for="street">Promoção: </label>

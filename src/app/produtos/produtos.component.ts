@@ -35,4 +35,9 @@ export class ProdutosComponent implements OnInit {
   onSubmit() {
     console.log(this.produtoForm.value);
   }
+
+  extractFieldValue(obj: any, field: string) {
+    if (!obj) return;
+    return obj[field];
+  }
 }
