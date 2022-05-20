@@ -1,5 +1,5 @@
-import { ProdutoModel } from './produto.model';
 import { Component, OnInit } from '@angular/core';
+import { ProdutoModel } from './produto.model';
 import { produtosMock } from './produtos.mock';
 
 @Component({
@@ -14,5 +14,9 @@ export class ProdutosComponent implements OnInit {
 
   ngOnInit(): void {
     this.produtos = produtosMock;
+  }
+
+  openDialog() {
+    // TODO: open dialog
   }
 }

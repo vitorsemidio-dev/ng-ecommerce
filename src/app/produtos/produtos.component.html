@@ -1,4 +1,7 @@
-<h2>Produtos</h2>
+<header class="header-wrapper">
+  <h2>Produtos</h2>
+  <button mat-button (click)="openDialog()">Open dialog</button>
+</header>
 
 <div class="produtos-wrapper">
   <div *ngFor="let produto of produtos">
