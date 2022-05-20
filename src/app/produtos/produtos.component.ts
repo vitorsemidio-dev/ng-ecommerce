@@ -17,7 +17,7 @@ export class ProdutosComponent implements OnInit {
 
   produtoForm = this.fb.group({
     nome: ['', [Validators.required, Validators.minLength(3)]],
-    preco: [0, [Validators.required, Validators.min(1)]],
+    preco: [null, [Validators.required, Validators.min(1)]],
     promocao: this.fb.group({
       id: [null],
     }),
@@ -32,9 +32,7 @@ export class ProdutosComponent implements OnInit {
     this.promocoes = promocoesMock;
   }
 
-  openDialog() {
-    // TODO: open dialog
-  }
+  openForm() {}
 
   onSubmit() {
     console.log(this.produtoForm.value);

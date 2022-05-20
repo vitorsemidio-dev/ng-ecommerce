@@ -1,14 +1,10 @@
 <header class="header-wrapper">
   <h2>Produtos</h2>
-  <button mat-button (click)="openDialog()">Open dialog</button>
+  <button mat-button (click)="openForm()">Criar Produto</button>
 </header>
 
-<app-poc-input></app-poc-input>
-
-<p>Form Status: {{ produtoForm.status }}</p>
-
-<form [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
-  <mat-form-field class="example-full-width" appearance="fill">
+<form class="form-wrapper" [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
     <mat-label>Nome Produto</mat-label>
     <input
       type="text"
@@ -17,22 +13,13 @@
       [errorStateMatcher]="matcher"
       placeholder="Ex. Mouse"
     />
-    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
     <mat-hint>Parece está tudo certo!</mat-hint>
-    <!-- <mat-error
-      *ngIf="
-        produtoForm.get('nome')?.hasError('email') &&
-        !produtoForm.get('nome')?.hasError('required')
-      "
-    >
-      Please enter a valid email address
-    </mat-error> -->
     <mat-error *ngIf="produtoForm.get('nome')?.hasError('required')">
       Nome é <strong>obrigatório</strong>
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field class="example-full-width" appearance="fill">
+  <mat-form-field>
     <mat-label>Preço</mat-label>
     <input
       type="number"
@@ -41,9 +28,7 @@
       [errorStateMatcher]="matcher"
       placeholder="Ex. R$ 10,00"
     />
-
     <mat-hint>Parece está tudo certo!</mat-hint>
-
     <mat-error *ngIf="produtoForm.get('preco')?.hasError('required')">
       Preço é <strong>obrigatório</strong>
     </mat-error>
@@ -59,7 +44,7 @@
   </mat-form-field>
 
   <div formGroupName="promocao">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Selecione uma promoção</mat-label>
       <mat-select [formControlName]="'id'">
         <mat-option>Nenhuma</mat-option>
@@ -71,12 +56,13 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-
-    <p>{{ produtoForm.get("promocao")?.get("id")?.value }}</p>
   </div>
 
-  <p>Complete the form to enable button.</p>
-  <button type="submit" [disabled]="!produtoForm.valid">Submit</button>
+  <footer class="flex-end">
+    <button mat-raised-button color="primary" [disabled]="!produtoForm.valid">
+      Salvar
+    </button>
+  </footer>
 </form>
 
 <div class="produtos-wrapper">
