@@ -1,0 +1,34 @@
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.produtos-wrapper {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.image-cover {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.p-relative {
+  position: relative;
+}
+
+.badge-promocao-container {
+  position: absolute;
+  top: calc(1rem / 2);
+  right: calc(1rem / 2);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}

@@ -1,0 +1,70 @@
+<form class="form-wrapper" [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Nome Produto</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControlName]="'nome'"
+      [errorStateMatcher]="matcher"
+      placeholder="Ex. Mouse"
+    />
+    <mat-hint>Parece está tudo certo!</mat-hint>
+    <mat-error *ngIf="produtoForm.get('nome')?.hasError('required')">
+      Nome é <strong>obrigatório</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Preço</mat-label>
+    <input
+      type="number"
+      matInput
+      [formControlName]="'preco'"
+      [errorStateMatcher]="matcher"
+      placeholder="Ex. R$ 10,00"
+    />
+    <mat-hint>Parece está tudo certo!</mat-hint>
+    <mat-error *ngIf="produtoForm.get('preco')?.hasError('required')">
+      Preço é <strong>obrigatório</strong>
+    </mat-error>
+    <mat-error
+      *ngIf="
+        produtoForm.get('preco')?.hasError('min') &&
+        !produtoForm.get('preco')?.hasError('required')
+      "
+    >
+      O valor mínimo é
+      {{ extractFieldValue(produtoForm.get("preco")?.getError("min"), "min") }}
+    </mat-error>
+  </mat-form-field>
+
+  <div formGroupName="promocao">
+    <mat-form-field>
+      <mat-label>Selecione uma promoção</mat-label>
+      <mat-select [formControlName]="'id'">
+        <mat-option>Nenhuma</mat-option>
+        <mat-option
+          *ngFor="let promocaoItem of data.promocoes"
+          [value]="promocaoItem.id"
+        >
+          {{ promocaoItem.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <footer class="flex-end">
+    <button mat-stroked-button color="primary" [mat-dialog-close]="false">
+      Fechar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!produtoForm.valid"
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+    >
+      Salvar
+    </button>
+  </footer>
+</form>

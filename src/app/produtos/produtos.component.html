@@ -1,0 +1,64 @@
+<header class="header-wrapper">
+  <h2>Produtos</h2>
+  <button mat-raised-button color="primary" (click)="openDialog()">
+    <mat-icon>add</mat-icon> Adicionar
+  </button>
+</header>
+
+<div class="produtos-wrapper">
+  <div *ngFor="let produto of produtos$ | async">
+    <mat-card>
+      <mat-card-header class="card-header">
+        <mat-card-title>{{ produto.nome }}</mat-card-title>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openDialog(produto)">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="handleDelete(produto)">
+            <mat-icon>delete</mat-icon>
+            <span>Excluir</span>
+          </button>
+          <button mat-menu-item disabled>
+            <mat-icon>favorite</mat-icon>
+            <span>Favoritos</span>
+          </button>
+        </mat-menu>
+      </mat-card-header>
+      <div class="p-relative">
+        <img
+          class="image-cover"
+          src="https://picsum.photos/200/300?random=1"
+          alt="Random photo from picsum"
+        />
+
+        <div *ngIf="produto.promocao" class="badge-promocao-container">
+          <mat-chip *ngIf="produto.promocao.leveX" color="primary" selected>
+            {{ produto.promocao.leveX }} pague {{ produto.promocao.pagueY }}
+          </mat-chip>
+          <mat-chip *ngIf="produto.promocao.compreX" color="accent" selected>
+            {{ produto.promocao.compreX }} por {{ produto.promocao.porY }}
+          </mat-chip>
+        </div>
+      </div>
+      <mat-card-content style="margin-top: 0.5rem">
+        <strong style="font-size: 1.5rem">
+          {{ produto.preco | currency }}
+        </strong>
+      </mat-card-content>
+      <mat-card-actions style="display: grid; grid-template-columns: 1fr">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="handleAddProduto(produto)"
+        >
+          <mat-icon>add_shopping_cart</mat-icon>
+          Adicionar ao Carrinho
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
