@@ -8,7 +8,13 @@ import { CarrinhoItemModel } from './carrinho-item.model';
 })
 export class CarrinhoService {
   private readonly carrinho$ = new BehaviorSubject<CarrinhoItemModel[]>([]);
-  constructor() {}
+  private readonly key = '@siteware:carrinho';
+  constructor() {
+    const carrinho = localStorage.getItem(this.key);
+    if (carrinho) {
+      this.carrinho$.next(JSON.parse(carrinho));
+    }
+  }
 
   getCarrinho() {
     return this.carrinho$.asObservable();
@@ -23,6 +29,7 @@ export class CarrinhoService {
       carrinho.push({ ...item, quantidade: 1 });
     }
     this.carrinho$.next(carrinho);
+    localStorage.setItem(this.key, JSON.stringify(carrinho));
   }
 
   decrementItem(item: CarrinhoItemModel | ProdutoModel) {
@@ -35,6 +42,7 @@ export class CarrinhoService {
       }
     }
     this.carrinho$.next(carrinho);
+    localStorage.setItem(this.key, JSON.stringify(carrinho));
   }
 
   removeItem(item: CarrinhoItemModel | ProdutoModel) {
@@ -44,5 +52,6 @@ export class CarrinhoService {
       carrinho.splice(index, 1);
     }
     this.carrinho$.next(carrinho);
+    localStorage.setItem(this.key, JSON.stringify(carrinho));
   }
 }
