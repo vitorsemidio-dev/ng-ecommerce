@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class CarrinhoComponent implements OnInit {
   carrinho$!: Observable<CarrinhoItemModel[]>;
+  precoTotalCarrinho: number = 0;
   showTableLegacy = false;
 
   displayedColumns: string[] = [
@@ -38,6 +39,7 @@ export class CarrinhoComponent implements OnInit {
 
     this.carrinho$.subscribe((carrinho) => {
       this.dataSource = new MatTableDataSource<CarrinhoItemModel>(carrinho);
+      this.precoTotalCarrinho = this._calculateTotalPrecoCarrinho(carrinho);
     });
   }
 
@@ -51,5 +53,13 @@ export class CarrinhoComponent implements OnInit {
 
   handleRemoveItem(item: CarrinhoItemModel | ProdutoModel) {
     this.carrinhoService.removeItem(item);
+  }
+
+  private _calculateTotalPrecoCarrinho(carrinho: CarrinhoItemModel[]) {
+    let total = carrinho.reduce(
+      (acc, curr) => acc + (curr.precoSubTotal || 0),
+      0
+    );
+    return total;
   }
 }
