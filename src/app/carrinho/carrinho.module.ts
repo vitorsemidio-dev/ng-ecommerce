@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { CarrinhoRoutingModule } from './carrinho-routing.module';
 import { CarrinhoComponent } from './carrinho.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [CarrinhoComponent],
@@ -11,6 +13,8 @@ import { CarrinhoComponent } from './carrinho.component';
     CommonModule,
     CarrinhoRoutingModule,
     MatButtonModule,
+    MatTableModule,
+    MatCheckboxModule,
     MatIconModule,
   ],
 })
