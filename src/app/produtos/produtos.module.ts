@@ -16,9 +16,10 @@ import { ProdutoService } from './produto.service';
 import { ProdutosRoutingModule } from './produtos-routing.module';
 import { ProdutosComponent } from './produtos.component';
 import { PromocaoService } from './promocao.service';
+import { ProdutoFormComponent } from './produto-form/produto-form.component';
 
 @NgModule({
-  declarations: [ProdutosComponent],
+  declarations: [ProdutosComponent, ProdutoFormComponent],
   imports: [
     CommonModule,
     ProdutosRoutingModule,

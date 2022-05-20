@@ -7,8 +7,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
 import { CarrinhoService } from '../carrinho/carrinho.service';
+import { ProdutoFormComponent } from './produto-form/produto-form.component';
 import { ProdutoModel } from './produto.model';
 import { ProdutoService } from './produto.service';
 import { PromocaoModel } from './promocao.model';
@@ -35,6 +37,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class ProdutosComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
+  promocoes: PromocaoModel[] = [];
 
   produtos$!: Observable<ProdutoModel[]>;
   promocoes$!: Observable<PromocaoModel[]>;
@@ -55,7 +58,8 @@ export class ProdutosComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private produtoService: ProdutoService,
     private promocaoService: PromocaoService,
-    private carrinhoService: CarrinhoService
+    private carrinhoService: CarrinhoService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -78,6 +82,9 @@ export class ProdutosComponent implements OnInit, OnDestroy {
 
   loadPromocoes() {
     this.promocoes$ = this.promocaoService.get();
+    this.promocaoService.get().subscribe((promocoes) => {
+      this.promocoes = promocoes;
+    });
   }
 
   loadCarrinho() {
@@ -119,6 +126,19 @@ export class ProdutosComponent implements OnInit, OnDestroy {
   extractFieldValue(obj: any, field: string) {
     if (!obj) return;
     return obj[field];
+  }
+
+  openDialog(produto?: ProdutoModel): void {
+    const dialogRef = this.dialog.open(ProdutoFormComponent, {
+      width: '450px',
+      data: { promocoes: this.promocoes, produtoForm: produto },
+    });
+
+    dialogRef.afterClosed().subscribe((shouldRefresh) => {
+      if (shouldRefresh) {
+        this.loadProdutos();
+      }
+    });
   }
 
   private _fillForm(produto: ProdutoModel) {
